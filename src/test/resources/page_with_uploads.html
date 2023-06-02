@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Test::uploads</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  </head>
+  <body>
+    <h1>File uploads</h1>
+
+    <div><a href="/files/hello_world.txt">Download me</a></div>
+    <div><a href="/files/hello_world.txt" id="download-with-alert">Download me with alert</a></div>
+    <div><a href="/files/hello_world.txt?pause=2000">Start download after delay (2000 ms)</a></div>
+    <div><a href="/files/hello_world.txt?duration=1000">Download me slowly</a></div>
+    <div><a href="/files/hello_world.txt?duration=2000" id="download-after-delay">Download me super slowly</a></div>
+
+    <div><a href="/files/файл-с-русским-названием.txt">Download file with cyrillic name</a></div>
+    <div><a href="/files/файл-с-запрещёнными-символами.txt">Download file with "forbidden" characters in name</a></div>
+    <div><a href="/files/ø-report.txt">Download file with "ø" in name</a></div>
+    <div><a href="/files/tiny.exe">Download EXE file</a></div>
+    <div><a href="/files/tiny.dmg">Download DMG file</a></div>
+    <div><a href="/files/minimal.pdf">Download a PDF</a></div>
+    <div><a href="/files/unexisting_file.png">Download missing file</a></div>
+    <div><a href="/files/unexisting%20file%20encoded.png">Check href value</a></div>
+    <div><a href="/files/empty-file.txt">Download empty file</a></div>
+
+    <div><a href="/files/hello_world.part">Download file *part</a></div>
+    <div><a href="/files/hello_world.crdownload">Download file *crdownload</a></div>
+    <div><a href="/files/large_file.txt">Download large file</a></div>
+
+    <script>
+      document.getElementById('download-after-delay').addEventListener('click', event => {
+        event.preventDefault();
+        setTimeout(() => {
+          window.location = event.target.href;
+        }, 1100);
+      })
+      document.getElementById('download-with-alert').addEventListener('click', function (event) {
+        event.preventDefault();
+        alert('Are you sure to download it?');
+        window.location = event.target.href;
+      }, false);
+    </script>
+  </body>
+</html>

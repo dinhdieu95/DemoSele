@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<input type="text" value="Hello World" id="text-to-copy">
+<button id="button-copy-text" disabled>Copy text</button>
+<button id="button-copy-text-slowly" disabled>Copy text slowly</button>
+
+<div id="debug">Clipboard is empty...</div>
+
+<script>
+  (function() {
+    function copyTextToClipboard() {
+      const copyText = document.getElementById("text-to-copy");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+      document.getElementById('debug').innerText += "Copied the text: " + copyText.value;
+    }
+
+    function copyTextSlowly() {
+      setTimeout(copyTextToClipboard, 1000);
+    }
+
+    function initButton(webElement, clickHandler) {
+      webElement.addEventListener('click', clickHandler, false);
+      webElement.removeAttribute('disabled');
+    }
+    initButton(document.getElementById('button-copy-text'), copyTextToClipboard);
+    initButton(document.getElementById('button-copy-text-slowly'), copyTextSlowly);
+  })();
+</script>
+
+</body>
+</html>
